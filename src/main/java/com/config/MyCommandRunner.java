@@ -16,7 +16,8 @@ public class MyCommandRunner implements CommandLineRunner{
 
     private static String loginurl = "http://localhost:8080";
 
-    private static String googleexcute = "E:\\搜狗浏览器\\SogouExplorer\\SogouExplorer.exe";
+//    private static String googleexcute = "E:\\搜狗浏览器\\SogouExplorer\\SogouExplorer.exe";
+    private static String googleexcute = "C:\\Users\\ADMIN\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe";
 
     @Override
     public void run(String... args) throws Exception {
