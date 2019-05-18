@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.RechargeDao">
+    <resultMap id="payLogs" type="com.bean.Recharge">
+        <result property="memberid" column="memberid" javaType="Integer"/>
+        <result property="amout" column="amout" javaType="string"/>
+        <result property="paytype" column="paytype" javaType="string"/>
+        <result property="handlerman" column="handlerman" javaType="string"/>
+        <result property="paytime" column="paytime" javaType="Date"/>
+        <result property="description" column="description" javaType="string"/>
+        <result property="balance" column="balance" javaType="string"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.bean.Recharge">
+        insert into paylog values (#{memberid},#{amout},#{paytype},#{handlerman},sysdate(),#{description},#{balance},#{recordId});
+    </insert>
+    <delete id="del">
+        DELETE from paylog where recordid = #{id}
+    </delete>
+    <select id="getLogs" resultMap="payLogs">
+        SELECT l.memberid as memberid,l.amout as amout,l.paytype as paytype,c.customname as handlerman,l.paytime as paytime,l.description AS description,l.balance AS balance FROM paylog l left join custom c on l.handlerman = c.id
+        where l.memberid = #{memberId} order by l.paytime desc;
+    </select>
+</mapper>

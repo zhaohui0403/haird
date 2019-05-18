@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.WageDao">
+    <resultMap id="wages" type="com.bean.Wage">
+        <result column="id" property="id" javaType="Integer"/>
+        <result column="amout" property="amout" javaType="String"/>
+        <result column="description" property="description" javaType="String"/>
+        <result column="time" property="time" javaType="Date"/>
+        <result column="customname" property="customname" javaType="String"/>
+    </resultMap>
+    <insert id="insert">
+        insert into wage  values (#{id},#{amout},#{description},sysdate(),#{recordId},#{wageType});
+    </insert>
+    <update id="updateWage" parameterType="com.bean.Wage">
+        UPDATE wage SET amout = #{amout}
+        where id = #{id} and wageType = #{wageType}
+    </update>
+    <delete id="del" parameterType="Integer">
+        DELETE from wage where recordid = #{id}
+    </delete>
+    <select id="wageDetail" resultMap="wages" parameterType="com.bean.Wage">
+        select w.*,c.customname FROM wage w left join custom c on w.id = c.id
+        WHERE 1=1
+        <if test="id != null and id != ''">
+            and w.id = #{id}
+        </if>
+        and w.time between #{startTime} and #{endTime}
+        order by w.time
+    </select>
+    <select id="getWage" resultMap="wages" parameterType="com.bean.Wage">
+        SELECT w.id as id,CAST(sum(w.amout) AS DECIMAL (19,2)) as amout,c.customname as customname FROM wage w LEFT JOIN custom c on w.id = c.id
+        WHERE 1=1
+        <if test="id != null and id != ''">
+            and w.id = #{id}
+        </if>
+        and w.time between #{startTime} and #{endTime}
+        group by w.id
+    </select>
+</mapper>

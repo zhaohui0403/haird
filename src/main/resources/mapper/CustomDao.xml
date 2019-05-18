@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.CustomDao">
+    <resultMap id="customs" type="com.bean.Custom">
+        <result column="customname" javaType="String" property="customname"/>
+        <result column="commission1" javaType="String" property="commission1"/>
+        <result column="commission2" javaType="String" property="commission2"/>
+        <result column="wage" javaType="String" property="wage"/>
+        <result column="customtype" javaType="String" property="customtype"/>
+    </resultMap>
+    <insert id="addCustom" parameterType="com.bean.Custom" useGeneratedKeys="true" keyProperty="id">
+        insert into custom (customname,commission1,commission2,wage,customtype)
+        values (#{customname},#{commission1},#{commission2},#{wage},#{customtype});
+    </insert>
+    <update id="update" parameterType="com.bean.Custom">
+        UPDATE custom SET customname = #{customname},commission1 = #{commission1},commission2 = #{commission2},customtype = #{customtype},wage = #{wage}
+         where id = #{id}
+    </update>
+    <delete id="deleteById" parameterType="String">
+        UPDATE custom  SET flag = 0 where id = #{id}
+    </delete>
+    <select id="getCustoms" resultMap="customs" parameterType="com.bean.Custom">
+        SELECT * from custom
+        where
+        1=1 AND flag = 1
+        <if test="customname != null and customname != ''">
+            AND customname = #{customname}
+        </if>
+        <if test="customtype != null and customtype != ''">
+            AND customtype = #{customtype}
+        </if>
+    </select>
+    <select id="getCustomsById" parameterType="String" resultType="com.bean.Custom">
+        select * FROM custom WHERE id = #{id}
+    </select>
+    <select id="getCustomsByType" resultType="com.bean.Custom" parameterType="String">
+        select * from custom where customtype = #{customtype} and flag = 1
+    </select>
+</mapper>

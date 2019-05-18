@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.MemberDao">
+    <resultMap id="members" type="com.bean.Member">
+        <result property="id" javaType="Integer" column="id"/>
+        <result property="username" javaType="String" column="username"/>
+        <result property="telephone" javaType="String" column="telephone"/>
+        <result property="sex" javaType="String" column="sex"/>
+        <result property="customType" javaType="String" column="customType"/>
+        <result property="referrer" javaType="String" column="referrer"/>
+        <result property="amout" javaType="String" column="amout"/>
+        <result property="signtime" javaType="Date" column="signtime"/>
+    </resultMap>
+    <insert id="addMember" parameterType="com.bean.Member" useGeneratedKeys="true" keyProperty="id">
+        insert into member (username,telephone,sex,customType,referrer,amout,signtime) values (#{username},#{telephone},#{sex},#{customType},#{referrer},0,sysdate())
+    </insert>
+    <update id="update" parameterType="Integer">
+        <if test="id != null and id != ''">
+            UPDATE member SET username = #{username},telephone = #{telephone},sex = #{sex},customType = #{customType},referrer = #{referrer}
+            where
+            id = #{id}
+        </if>
+    </update>
+    <update id="charge" parameterType="com.bean.Recharge">
+          update member set amout = amout + #{amout}
+          where id = #{memberid}
+    </update>
+    <select id="getMembers" resultMap="members" parameterType="com.bean.Member">
+        select
+        m.id as id,m.username as username, m.telephone as telephone , m.sex as sex,mb.username as referrer,m.signtime as signtime,
+        m.amout as amout,m.customType as customType
+        from member m left JOIN member mb ON m.referrer = mb.id
+        WHERE 1 = 1
+        <if test="id != null and id !='' ">
+            AND m.id = #{id}
+        </if>
+        <if test="username != null and username !='' ">
+            AND m.username = #{username}
+        </if>
+        <if test="telephone != null and telephone !=''">
+            and m.telephone = #{telephone}
+        </if>
+        <if test="referrer != null and referrer !=''">
+            and m.referrer = #{referrer}
+        </if>
+        and m.signtime between #{startTime} and #{endTime}
+        ORDER BY m.signtime DESC
+        limit #{size} offset #{offset}
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(*) from member
+        WHERE 1 = 1
+        <if test="id != null and id !='' ">
+            AND id = #{id}
+        </if>
+        <if test="username != null and username !='' ">
+            AND username = #{username}
+        </if>
+        <if test="telephone != null and telephone !=''">
+            and telephone = #{telephone}
+        </if>
+        <if test="referrer != null and referrer !=''">
+            and referrer = #{referrer}
+        </if>
+        and signtime between #{startTime} and #{endTime}
+    </select>
+    <select id="getMemberById" resultMap="members" parameterType="String">
+        select m.id as id,m.username as username, m.telephone as telephone , m.sex as sex,mb.username as referrer,m.signtime as signtime,
+        m.amout as amout,m.customType as customType
+        from member m left JOIN member mb ON m.referrer = mb.id
+        WHERE m.id = #{id}
+    </select>
+    <select id="getAmout" resultType="java.lang.String">
+        SELECT amout from member where id = #{cardId}
+    </select>
+    <select id="getMemberByTel" resultType="com.bean.Member">
+        SELECT *
+        from member
+        WHERE telephone = #{telephone} limit 1 offset 0
+    </select>
+</mapper>

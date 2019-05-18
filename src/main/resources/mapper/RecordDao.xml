@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.RecordDao">
+    <resultMap id="records" type="com.bean.Record">
+        <result property="id" javaType="Integer" column="id"/>
+        <result property="contype" javaType="String" column="contype"/>
+        <result property="discount" javaType="String" column="discount"/>
+        <result property="paytype" javaType="String" column="paytype"/>
+        <result property="memberId" javaType="Integer" column="memberid"/>
+        <result property="hairstye" javaType="String" column="hairstye"/>
+        <result property="assistant" javaType="String" column="assistant"/>
+        <result property="haircommi" javaType="String" column="haircommi"/>
+        <result property="assicommi" javaType="String" column="assicommi"/>
+        <result property="amout" javaType="String" column="amout"/>
+        <result property="contime" javaType="Date" column="contime"/>
+    </resultMap>
+    <insert id="insertRecord" parameterType="com.bean.Record" useGeneratedKeys="true" keyProperty="id">
+        insert into record (contype,discount,memberid,paytype,hairstye,assistant,haircommi,assicommi,amout,contime)
+        values (#{contype},#{discount},#{memberId},#{paytype},#{hairstye},#{assistant},#{haircommi},#{assicommi},#{amout},sysdate());
+    </insert>
+    <delete id="del" parameterType="Integer">
+        delete from record where id = #{id}
+    </delete>
+    <select id="count" resultType="java.lang.Integer" parameterType="com.bean.Record">
+        SELECT count(*) from record
+        where 1=1
+        <include refid="condition"/>
+    </select>
+    <select id="getRecords" resultMap="records">
+        SELECT <include refid="column"/>
+        from record r left JOIN custom c1 on r.hairstye = c1.id LEFT JOIN custom c2 on r.assistant = c2.id
+        where 1=1
+        <include refid="condition"/>
+    </select>
+    <select id="getRecordById" resultType="com.bean.Record">
+        SELECT * FROM
+        record
+        WHERE id = #{id}
+    </select>
+
+    <sql id="condition">
+        <if test="contype != null and contype !='' ">
+            AND contype = #{contype}
+        </if>
+        <if test="paytype != null and paytype !=''">
+            and paytype = #{paytype}
+        </if>
+        <if test="assistant != null and assistant !=''">
+            and assistant = #{assistant}
+        </if>
+        <if test="hairstye != null and hairstye !=''">
+            and hairstye = #{hairstye}
+        </if>
+        and contime between #{startTime} and #{endTime}
+        order by contime desc
+    </sql>
+
+    <sql id="column">
+        r.id as id,r.contype as contype,r.discount as discount,r.paytype as paytype,r.memberid as memberid,c1.customname as hairstye,
+        c2.customname as assistant,r.haircommi as haircommi,r.assicommi as assicommi,r.amout as amout,r.contime as contime
+    </sql>
+</mapper>

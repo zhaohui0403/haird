@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.FundsDao">
+    <resultMap id="funds" type="com.bean.Funds">
+        <result property="id" javaType="int" column="id"/>
+        <result property="des" javaType="String" column="des"/>
+        <result property="paytype" javaType="int" column="paytype"/>
+        <result property="consumetype" javaType="int" column="consumetype"/>
+        <result property="consdate" javaType="date" column="consdate"/>
+        <result property="amout" javaType="String" column="amout"/>
+    </resultMap>
+    <insert id="add" parameterType="com.bean.Funds">
+         insert into funds (des,paytype,consumetype,amout,consdate,recordid) values (#{des},#{paytype},#{consumetype},#{amout},sysdate(),#{recordId});
+    </insert>
+    <update id="update">
+        UPDATE funds
+        SET des = #{des},amout = #{amout}
+        where id = #{id}
+    </update>
+    <delete id="del">
+        DELETE from funds where recordid = #{id}
+    </delete>
+    <select id="getFunds" resultMap="funds">
+        select @rowno:=@rowno + 1 as id,des as des ,amout,consdate
+        from funds,(select @rowno:=0) t
+        WHERE
+        1=1
+        <if test="status != null and status.size() > 0">
+            and consumetype IN
+            <foreach collection="status" open="(" close=")" separator="," item="status">
+                #{status}
+            </foreach>
+        </if>
+        and consdate BETWEEN #{startTime} and #{endTime}
+        order by consdate
+    </select>
+    <select id="getAmout" resultType="java.lang.String">
+        select ifnull (sum(amout),0)
+        from funds
+        WHERE
+        1=1
+        <if test="status != null and status.size() > 0">
+            and consumetype IN
+            <foreach collection="status" open="(" close=")" separator="," item="status">
+                #{status}
+            </foreach>
+        </if>
+        and consdate BETWEEN #{startTime} and #{endTime}
+    </select>
+
+</mapper>
