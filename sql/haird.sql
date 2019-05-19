@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50629
 File Encoding         : 65001
 
-Date: 2019-05-19 15:30:04
+Date: 2019-05-19 16:07:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -63,7 +63,11 @@ CREATE TABLE `member` (
   `referrer` varchar(255) DEFAULT NULL COMMENT '推荐人',
   `amout` varchar(255) NOT NULL,
   `signtime` datetime NOT NULL COMMENT '注册时间',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pk_member_tel` (`telephone`),
+  KEY `pk_member_username` (`username`),
+  KEY `pk_member_sex` (`sex`),
+  KEY `pk_member_customtype` (`customType`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10052 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -78,7 +82,9 @@ CREATE TABLE `paylog` (
   `paytime` datetime NOT NULL COMMENT '支付时间',
   `description` varchar(255) DEFAULT NULL,
   `balance` varchar(255) NOT NULL COMMENT '余额',
-  `recordid` int(11) DEFAULT NULL COMMENT '消费id'
+  `recordid` int(11) DEFAULT NULL COMMENT '消费id',
+  KEY `pk_paylog_memberid` (`memberid`),
+  KEY `pk_paylog_recordid` (`recordid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -87,8 +93,8 @@ CREATE TABLE `paylog` (
 DROP TABLE IF EXISTS `record`;
 CREATE TABLE `record` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `contype` varchar(255) NOT NULL,
-  `discount` varchar(255) NOT NULL,
+  `contype` varchar(255) NOT NULL COMMENT '消费类型',
+  `discount` varchar(255) NOT NULL COMMENT '折扣',
   `memberid` int(11) DEFAULT NULL COMMENT '会员卡号',
   `paytype` varchar(255) NOT NULL,
   `hairstye` varchar(255) NOT NULL COMMENT '发型师',
@@ -97,7 +103,11 @@ CREATE TABLE `record` (
   `assicommi` varchar(255) NOT NULL COMMENT '助理提成',
   `amout` varchar(255) NOT NULL COMMENT '消费金额',
   `contime` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `pk_record_contype` (`contype`),
+  KEY `pk_record_paytype` (`paytype`),
+  KEY `pk_record_hairstye` (`hairstye`),
+  KEY `pk_record_assistant` (`assistant`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -131,5 +141,6 @@ CREATE TABLE `wage` (
   `description` varchar(255) NOT NULL COMMENT '工资描述',
   `time` datetime NOT NULL,
   `recordid` int(11) DEFAULT NULL COMMENT '消费记录ID',
-  `wagetype` int(11) DEFAULT NULL
+  `wagetype` int(11) DEFAULT NULL,
+  KEY `pk_wage_id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
