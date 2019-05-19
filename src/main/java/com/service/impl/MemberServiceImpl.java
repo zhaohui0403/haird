@@ -57,4 +57,13 @@ public class MemberServiceImpl implements MemberService {
     public Member getMemberByTel(String telephone) {
         return memberDao.getMemberByTel(telephone);
     }
+
+    @Override
+    public boolean checkTel(String telephone) {
+        Member memberByTel = memberDao.getMemberByTel(telephone);
+        if(memberByTel == null){
+            return true;
+        }
+        return false;
+    }
 }

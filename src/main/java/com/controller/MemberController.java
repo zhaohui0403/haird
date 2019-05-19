@@ -9,6 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Administrator on 2019/4/8.
  */
@@ -62,5 +65,13 @@ public class MemberController {
     public Member getMember(Model model,String telephone){
         Member member = memberService.getMemberByTel(telephone);
         return member;
+    }
+    @RequestMapping("/checkTel")
+    @ResponseBody
+    public Map checkTel(String telephone){
+        Map<String,Object> map = new HashMap<String, Object>();
+        boolean flag = memberService.checkTel(telephone);
+        map.put("valid",flag);
+        return map;
     }
 }

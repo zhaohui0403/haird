@@ -18,4 +18,6 @@ public interface MemberService {
     String getAmout(String memberId);
 
     Member getMemberByTel(String telephone);
+
+    boolean checkTel(String telephone);
 }
