@@ -2,6 +2,7 @@ package com.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -10,14 +11,14 @@ import java.io.IOException;
 /**
  * Created by Administrator on 2019/4/23.
  */
-//@Component
+@Component
 public class MyCommandRunner implements CommandLineRunner{
     Logger logger = LoggerFactory.getLogger(MyCommandRunner.class);
 
     private static String loginurl = "http://localhost:8080";
 
-//    private static String googleexcute = "E:\\搜狗浏览器\\SogouExplorer\\SogouExplorer.exe";
-    private static String googleexcute = "C:\\Users\\ADMIN\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe";
+    @Value("${googleexcute}")
+    private String googleexcute;
 
     @Override
     public void run(String... args) throws Exception {
