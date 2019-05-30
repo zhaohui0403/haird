@@ -19,7 +19,7 @@
     </div>
     <div style="height: 100%;float: left;border: 1px solid #999999"></div>
     <div class="right" id="right">
-        <iframe name="fname" src="/right" class="fname" allowtransparency="true"></iframe>
+        <iframe name="fname" id="fname" src="/right" class="fname" allowtransparency="true"></iframe>
     </div>
 </div>
 <script type="text/javascript">

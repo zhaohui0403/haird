@@ -3,12 +3,15 @@ package com.controller;
 import com.bean.Member;
 import com.model.Page;
 import com.service.MemberService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,14 +20,19 @@ import java.util.Map;
  */
 @Controller
 public class MemberController {
+
+    Logger logger = LoggerFactory.getLogger(MemberController.class);
     @Autowired
     private MemberService memberService;
 
     @RequestMapping("/member")
     public String member(Model model, Member member){
+        long startTime = new Date().getTime();
         Page<Member> members = memberService.getMembers(member);
         model.addAttribute("memberList",members);
         model.addAttribute("member",member);
+        long endTime = new Date().getTime();
+        logger.info("会员列表查询用时：" + (endTime-startTime));
         return "member/member";
     }
     

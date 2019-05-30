@@ -34,7 +34,6 @@ public class CommonController {
     @ResponseBody
     @RequestMapping("/match")
     public boolean match(String password){
-        System.out.println(password.toString());
         User user = userService.getUserByUsername("user");
         if(user.getPassword().equals(password)){
             return true;
