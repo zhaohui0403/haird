@@ -194,22 +194,27 @@
                         validating: 'glyphicon glyphicon-refresh'
                     },
                     fields: {
-                        memberId:{
-                            validators:{
-                                notEmpty:{
-                                    message:' '
-                                },
-                                stringLength:{
-                                    min: 5,
-                                    max: 5,
-                                    message: ' '
-                                }
-                            }
-                        },
+//                        telephone: {
+//                            validators: {
+//                                notEmpty: {
+//                                    message: '电话号码不能为空'
+//                                },
+//                                stringLength: {
+//                                    min: 11,
+//                                    max: 11,
+//                                    message: '请输入11位手机号码'
+//                                },
+//                                regexp: {
+//                                    regexp: /^1[3|5|8]{1}[0-9]{9}$/,
+//                                    message: '请输入正确的手机号码'
+//                                },
+//                                threshold: 11
+//                            }
+//                        },
                         price:{
                             validators:{
                                 notEmpty:{
-                                    message:' '
+                                    message:'请填写价格！'
                                 }
                             }
 

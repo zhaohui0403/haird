@@ -37,25 +37,29 @@ $(function () {
     $('#telephone').blur(function () {
         var amout = $('#price').val() * $('#discount').val() / 100;
         var telephone = $('#telephone').val();
-        if(!isEmpty(memberId)){
-            $.ajax({
-                type: "post",
-                async: false,
-                dateType: "json",
-                url: 'getMember?telephone=' + telephone,
-                success: function (data) {
-                    if (data == null || data == "") {
-                        $('button[type="submit"]').attr("disabled", true);
-                        layer.msg("该手机号未注册会员卡，请重新填写！");
-                    } else if (data.amout < amout) {
-                        $('button[type="submit"]').attr("disabled", true);
-                        layer.msg("余额不足，请先进行充值或使用其他支付方式！");
+        if(telephone.length < 11){
+            layer.msg("请填写正确的手机号！");
+        }else {
+            if (!isEmpty(memberId)) {
+                $.ajax({
+                    type: "post",
+                    async: false,
+                    dateType: "json",
+                    url: 'getMember?telephone=' + telephone,
+                    success: function (data) {
+                        if (data == null || data == "") {
+                            $('button[type="submit"]').attr("disabled", true);
+                            layer.msg("该手机号未注册会员卡，请重新填写！");
+                        } else if (data.amout < amout) {
+                            $('button[type="submit"]').attr("disabled", true);
+                            layer.msg("余额不足，请先进行充值或使用其他支付方式！");
+                        }
+                        $('#membername').val(data.username);
+                        $('#memberId').val(data.id);
+                        $('#member').val(data.amout);
                     }
-                    $('#membername').val(data.username);
-                    $('#memberId').val(data.id);
-                    $('#member').val(data.amout);
-                }
-            });
+                });
+            }
         }
     });
     $('#hairstye').change(function () {

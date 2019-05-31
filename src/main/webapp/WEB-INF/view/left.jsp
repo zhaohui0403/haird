@@ -36,7 +36,7 @@
                 async: false,
                 dateType: "json",
                 url: "/match",
-                data: {password: 123456},
+                data: {password: pass},
                 success: function (date) {
                     if (date == true) {
                         layer.close(index);
