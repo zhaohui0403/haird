@@ -7,6 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    Object user = request.getSession().getAttribute("user");
+%>
 <html>
 <head>
     <title>head</title>
@@ -17,20 +20,31 @@
     <link href="/static/css/bootstrap-validator/bootstrapValidator.css" rel="stylesheet">
     <script src="/static/js/bootstrap/bootstrapValidator.min.js"></script>
     <script type="text/javascript" src="/static/js/bootstrap/bootstrap.min.js"></script>
-    <link href="/static/css/bootstrap/bootstrap-responsive.min.css" rel="stylesheet" />
-    <link href="/static/css/pages/login.css" rel="stylesheet" />
+    <link href="/static/css/bootstrap/bootstrap-responsive.min.css" rel="stylesheet"/>
+    <link href="/static/css/pages/login.css" rel="stylesheet"/>
     <style type="text/css">
         h1 {
-            color:#FFFFFF;
+            color: #FFFFFF;
             margin-top: 0px;
             font-size: 54px;
         }
     </style>
+    <script type="text/javascript">
+        if (top.location !== self.location) {
+            top.location = self.location;
+        }
+        $(function () {
+            var user = '<%=user%>';
+            if (user == null) {
+                top.href = "/login";
+            }
+        });
+    </script>
 </head>
 <body>
 <div>
     <div style="background-color: #333333;margin: 0px;text-align: center">
-            <h1>管理系统</h1>
+        <h1>管理系统</h1>
     </div>
 </div>
 </body>

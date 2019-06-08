@@ -1,0 +1,51 @@
+a {
+    color: black;
+    text-decoration: none;
+}
+
+button {
+    width: 200px;
+}
+
+.up {
+    float: right;
+    display: inline;
+    width: 0;
+    height: 0;
+    border-width: 0 8px 8px;
+    border-style: solid;
+    border-color: transparent transparent #333; /*透明 透明  灰*/
+    margin-top: 6px;
+    position: relative;
+}
+.down{
+    float: right;
+    display: inline;
+    width:0;
+    height:0;
+    border-width:8px 8px 0;
+    border-style:solid;
+    border-color:black transparent transparent;/*灰 透明 透明 */
+    margin-top: 6px;
+    position:relative;
+}
+.nav{
+    display: none;
+}
+
+.nav-tab{
+    font-size: 16px;
+    background-color: #D98200;
+}
+
+.emp{
+    float: right;
+    display: inline;
+    width:0;
+    height:0;
+    border-width:8px 8px 0;
+    border-style:solid;
+    border-color:transparent transparent transparent;/*灰 透明 透明 */
+    margin-top: 6px;
+    position:relative;
+}

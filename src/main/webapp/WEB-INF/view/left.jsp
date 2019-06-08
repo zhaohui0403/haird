@@ -9,45 +9,54 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script src="../static/js/layer/layer.js"></script>
-    <style type="text/css">
-        a {
-            color: black;
-            text-decoration: none;
-        }
-
-        button {
-            width: 200px;
-        }
-    </style>
+    <script src="/static/js/layer/layer.js"></script>
+    <script src="/static/js/left.js"></script>
+    <link rel="stylesheet" href="/static/css/left.css">
 </head>
 <body>
-<button type="button" class="btn btn-primary btn-lg "><a href="/member" target="fname"> 会员管理</a></button><br>
-<button type="button" class="btn btn-primary btn-lg "><a href="javascript:void(0);" onclick="return check('/funds')">财务管理</a></button><br>
-<button type="button" class="btn btn-primary btn-lg "><a href="javascript:void(0);" onclick="return check('/custom')">员工管理</a></button><br>
-<button type="button" class="btn btn-primary btn-lg "><a href="/rebate" target="fname">返利管理</a></button><br>
-<button type="button" class="btn btn-primary btn-lg "><a href="javascript:void(0);" onclick="return check('/wage')">工资管理</a></button><br>
-<button type="button" class="btn btn-primary btn-lg "><a href="/record" target="fname">消费管理</a></button><br>
-<script type="text/javascript">
-    function check(url) {
-        layer.prompt({title: '请输入密码：', formType: 1}, function (pass, index) {
-            $.ajax({
-                type: "post",
-                async: false,
-                dateType: "json",
-                url: "/match",
-                data: {password: pass},
-                success: function (date) {
-                    if (date == true) {
-                        layer.close(index);
-                        $('#fname').get(0).src = url;
-                    } else {
-                        layer.msg("您输入的密码有误，请重新输入！")
-                    }
-                }
-            });
-        });
-    }
-</script>
+<div>
+    <button type="button" class="btn btn-primary btn-lg " onclick="jump('/member')">会员管理
+        <div class="emp"></div>
+    </button>
+</div>
+<div>
+    <button type="button" class="btn btn-primary btn-lg " onclick="return check('/funds')">财务管理
+        <div class="emp"></div>
+    </button>
+</div>
+<div>
+    <button type="button" class="btn btn-primary btn-lg " onclick="return check('/custom')">员工管理
+        <div class="emp"></div>
+    </button>
+</div>
+<div>
+    <button type="button" class="btn btn-primary btn-lg " onclick="jump('/rebate')">返利管理
+        <div class="emp"></div>
+    </button>
+</div>
+<div>
+    <button type="button" class="btn btn-primary btn-lg " onclick="return check('/wage')">工资管理
+        <div class="emp"></div>
+    </button>
+</div>
+<div>
+    <button type="button" class="btn btn-primary btn-lg " onclick="jump('/record')">消费管理
+        <div class="emp"></div>
+    </button>
+</div>
+<div>
+    <button type="button" class="btn btn-primary btn-lg" onclick="show(this)">密码管理
+        <div class="down"></div>
+    </button>
+    <div class="nav">
+        <button type="button" class="btn btn-primary btn-lg nav-tab" onclick="jump('/loginChange')">登录密码修改</button><br>
+        <button type="button" class="btn btn-primary btn-lg nav-tab" onclick="jump('/powerChange')">权限密码修改</button>
+    </div>
+</div>
+<div>
+    <button type="button" class="btn btn-primary btn-lg " onclick="jump('/logout')">退出登录
+        <div class="emp"></div>
+    </button>
+</div>
 </body>
 </html>

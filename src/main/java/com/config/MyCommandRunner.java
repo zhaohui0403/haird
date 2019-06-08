@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Created by Administrator on 2019/4/23.
  */
-@Component
+//@Component
 public class MyCommandRunner implements CommandLineRunner{
     Logger logger = LoggerFactory.getLogger(MyCommandRunner.class);
 

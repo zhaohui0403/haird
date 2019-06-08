@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dao.UserDao">
+    <update id="update">
+        UPDATE USER SET password = #{password} where username = #{username}
+    </update>
 
     <select id="getUser" resultType="com.bean.User" parameterType="com.bean.User">
       SELECT * from USER
       where 1 = 1
-        <if test="user.username != null and user.username !='' ">
-            AND username = #{user.userName}
+        <if test="username != null and username !='' ">
+            AND username = #{username}
         </if>
-        <if test="user.password != null and user.password != ''">
-            and password = #{user.password}
+        <if test="password != null and password != ''">
+            and password = #{password}
         </if>
     </select>
     <select id="getUserByUsername" resultType="com.bean.User" parameterType="String">
