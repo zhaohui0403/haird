@@ -16,11 +16,11 @@ public class Pageable {
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd")
-    private Date startTime = DateUtils.getStartDate();
+    protected Date startTime;
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd")
-    private Date endTime = DateUtils.getTomoStartDate();
+    protected Date endTime;
     public Pageable() {
     }
 
@@ -50,7 +50,7 @@ public class Pageable {
 
     public Date getStartTime() {
         if(startTime == null || startTime.equals("")){
-            return DateUtils.getStartDate();
+            return DateUtils.getYearStartDate();
         }else {
             return startTime;
         }

@@ -15,37 +15,41 @@
 </head>
 <body>
 <div>
-    <button type="button" class="btn btn-primary btn-lg " onclick="jump('/member')">会员管理
+    <button type="button" class="btn btn-primary btn-lg nav-btn" onclick="show(this)">会员管理
+        <div class="down"></div>
+    </button>
+    <div class="nav">
+        <button type="button" class="btn btn-primary btn-lg nav-tab" onclick="jump('/member')">充值卡管理</button><br>
+        <button type="button" class="btn btn-primary btn-lg nav-tab" onclick="jump('hairdCard')">剪发卡管理</button>
+    </div>
+</div>
+<div>
+    <button type="button" class="btn btn-primary btn-lg nav-btn" onclick="jump('/record')">消费管理
         <div class="emp"></div>
     </button>
 </div>
 <div>
-    <button type="button" class="btn btn-primary btn-lg " onclick="return check('/funds')">财务管理
+    <button type="button" class="btn btn-primary btn-lg nav-btn" onclick="return check('/funds')">财务管理
         <div class="emp"></div>
     </button>
 </div>
 <div>
-    <button type="button" class="btn btn-primary btn-lg " onclick="return check('/custom')">员工管理
+    <button type="button" class="btn btn-primary btn-lg nav-btn" onclick="return check('/custom')">员工管理
         <div class="emp"></div>
     </button>
 </div>
 <div>
-    <button type="button" class="btn btn-primary btn-lg " onclick="jump('/rebate')">返利管理
+    <button type="button" class="btn btn-primary btn-lg nav-btn" onclick="jump('/rebate')">返利管理
         <div class="emp"></div>
     </button>
 </div>
 <div>
-    <button type="button" class="btn btn-primary btn-lg " onclick="return check('/wage')">工资管理
+    <button type="button" class="btn btn-primary btn-lg nav-btn" onclick="return check('/wage')">工资管理
         <div class="emp"></div>
     </button>
 </div>
 <div>
-    <button type="button" class="btn btn-primary btn-lg " onclick="jump('/record')">消费管理
-        <div class="emp"></div>
-    </button>
-</div>
-<div>
-    <button type="button" class="btn btn-primary btn-lg" onclick="show(this)">密码管理
+    <button type="button" class="btn btn-primary btn-lg nav-btn" onclick="show(this)">密码管理
         <div class="down"></div>
     </button>
     <div class="nav">
@@ -54,7 +58,7 @@
     </div>
 </div>
 <div>
-    <button type="button" class="btn btn-primary btn-lg " onclick="jump('/logout')">退出登录
+    <button type="button" class="btn btn-primary btn-lg nav-btn" onclick="jump('/logout')">退出登录
         <div class="emp"></div>
     </button>
 </div>

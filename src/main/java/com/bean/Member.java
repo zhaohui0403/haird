@@ -1,12 +1,14 @@
 package com.bean;
 
 import com.model.Pageable;
+import com.utils.DateUtils;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Administrator on 2019/4/5.
+ * 会员
  */
 public class Member extends Pageable implements Serializable {
     private static final long serialVersionUID = 5894930696075789392L;
@@ -84,5 +86,22 @@ public class Member extends Pageable implements Serializable {
 
     public void setSigntime(Date signtime) {
         this.signtime = signtime;
+    }
+    @Override
+    public Date getStartTime() {
+        if(super.startTime == null || super.startTime.equals("")){
+            return DateUtils.getMonthDate();
+        }else {
+            return startTime;
+        }
+    }
+
+    @Override
+    public Date getEndTime() {
+        if(super.endTime == null || super.endTime.equals("")){
+            return DateUtils.getTomoStartDate();
+        }else {
+            return endTime;
+        }
     }
 }

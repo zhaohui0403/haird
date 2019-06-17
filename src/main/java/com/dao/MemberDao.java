@@ -22,7 +22,9 @@ public interface MemberDao {
 
     void charge(Recharge recharge);
 
-    String getAmout(String cardId);
+    String getAmout(String id);
 
     Member getMemberByTel(String telephone);
+
+    String getUsernameById(int id);
 }

@@ -90,7 +90,7 @@ public class RecordServiceImpl implements RecordService {
             funds.setAmout(record.getAmout());
             funds.setRecordId(record.getId());
             funds.setConsumetype(1);
-            funds.setDes("收入" + record.getId() + "号单" + CommonUtils.getMap(record.getContype()) + "消费金额：" + record.getAmout() + "元");
+            funds.setDes("收入"+ CommonUtils.getMap(record.getContype()) + "消费金额：" + record.getAmout() + "元");
             fundsDao.add(funds);
         }
     }

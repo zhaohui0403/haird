@@ -71,11 +71,14 @@
         WHERE m.id = #{id}
     </select>
     <select id="getAmout" resultType="java.lang.String">
-        SELECT amout from member where id = #{cardId}
+        SELECT amout from member where id = #{id}
     </select>
     <select id="getMemberByTel" resultType="com.bean.Member">
         SELECT *
         from member
         WHERE telephone = #{telephone} limit 1 offset 0
+    </select>
+    <select id="getUsernameById" resultType="java.lang.String">
+        select username from member WHERE id = #{id}
     </select>
 </mapper>

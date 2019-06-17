@@ -45,7 +45,7 @@ public class RechargeServiceImpl implements RechargeService {
         Funds funds = new Funds();
         funds.setAmout(recharge.getAmout());
         funds.setConsumetype(0);
-        funds.setDes("会员卡"+recharge.getMemberid()+"充值"+recharge.getAmout()+"元");
+        funds.setDes("顾客" + memberDao.getUsernameById(recharge.getMemberid()) + "充值会员卡，收入" + recharge.getAmout() + "元");
         funds.setPaytype(Integer.parseInt(recharge.getPaytype()));
         fundsDao.add(funds);
         //会员卡消费记录

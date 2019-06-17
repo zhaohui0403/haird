@@ -33,9 +33,13 @@ button {
     display: none;
 }
 
+.nav-btn{
+    background-color: #4A515B;
+}
+
 .nav-tab{
     font-size: 16px;
-    background-color: #D98200;
+    background-color: #3c763d;
 }
 
 .emp{

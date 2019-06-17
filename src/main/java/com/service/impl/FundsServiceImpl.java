@@ -22,8 +22,6 @@ public class FundsServiceImpl implements FundsService {
         if(funds.getId() == null || funds.getId() == 0){
             funds.setConsumetype(-1);
             fundsDao.add(funds);
-        }else {
-            fundsDao.update(funds);
         }
     }
 

@@ -10,12 +10,13 @@
         <result property="amout" javaType="String" column="amout"/>
     </resultMap>
     <insert id="add" parameterType="com.bean.Funds">
-         insert into funds (des,paytype,consumetype,amout,consdate,recordid) values (#{des},#{paytype},#{consumetype},#{amout},sysdate(),#{recordId});
+         insert into funds (des,paytype,consumetype,amout,consdate,recordid,cardId)
+         values (#{des},#{paytype},#{consumetype},#{amout},sysdate(),#{recordId},#{cardId});
     </insert>
     <update id="update">
         UPDATE funds
-        SET des = #{des},amout = #{amout}
-        where id = #{id}
+        SET des = #{des},amout = #{amout},paytype = #{paytype}
+        where cardId = #{cardId}
     </update>
     <delete id="del">
         DELETE from funds where recordid = #{id}
@@ -32,7 +33,7 @@
             </foreach>
         </if>
         and consdate BETWEEN #{startTime} and #{endTime}
-        order by consdate
+        order by consdate desc
     </select>
     <select id="getAmout" resultType="java.lang.String">
         select ifnull (sum(amout),0)

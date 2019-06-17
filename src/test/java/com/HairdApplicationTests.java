@@ -1,8 +1,10 @@
 package com;
 
 import com.bean.Funds;
+import com.bean.HairdCard;
 import com.bean.Member;
 import com.bean.Record;
+import com.dao.HairdCardDao;
 import com.dao.MemberDao;
 import com.dao.RecordDao;
 import com.service.FundsService;
@@ -25,6 +27,8 @@ public class HairdApplicationTests {
 	private RecordDao recordDao;
 	@Autowired
 	private FundsService fundsService;
+	@Autowired
+	private HairdCardDao hairdCardDao;
 
 	@Test
 	public void contextLoads() {
@@ -53,6 +57,11 @@ public class HairdApplicationTests {
 	public void test3(){
 //		List<Funds> inComeFunds = fundsService.getInComeFunds(new Funds());
 		List<Member> members = memberDao.getMembers(new Member());
+	}
+	@Test
+	public void test4(){
+//		List<HairdCard> hairdCards = hairdCardDao.getHairdCards(new HairdCard());
+		List<HairdCard> hairdCardByCardId = hairdCardDao.getHairdCardByCardId("003");
 	}
 
 }

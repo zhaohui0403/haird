@@ -1,12 +1,14 @@
 package com.bean;
 
 import com.model.Pageable;
+import com.utils.DateUtils;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Administrator on 2019/4/5.
+ * 工资
  */
 public class Wage extends Pageable implements Serializable {
     private static final long serialVersionUID = -2831566991876172043L;
@@ -75,5 +77,22 @@ public class Wage extends Pageable implements Serializable {
 
     public void setWageType(int wageType) {
         this.wageType = wageType;
+    }
+    @Override
+    public Date getStartTime() {
+        if(super.startTime == null || super.startTime.equals("")){
+            return DateUtils.getMonthDate();
+        }else {
+            return startTime;
+        }
+    }
+
+    @Override
+    public Date getEndTime() {
+        if(super.endTime == null || super.endTime.equals("")){
+            return DateUtils.getTomoStartDate();
+        }else {
+            return endTime;
+        }
     }
 }

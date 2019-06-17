@@ -5,6 +5,7 @@ import java.util.Date;
 
 /**
  * Created by Administrator on 2019/4/5.
+ * 充值
  */
 public class Recharge implements Serializable{
     private static final long serialVersionUID = 235786207283379400L;

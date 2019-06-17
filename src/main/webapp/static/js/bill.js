@@ -1,4 +1,9 @@
 $(function () {
+    var price = $("#price").val();
+    if(price != null){
+        haircommi();
+        assicommi();
+    }
     $('#price').blur(function () {
         var price = $('#price').val();
         var discount = $('#discount').val();
@@ -33,7 +38,7 @@ $(function () {
         }
         haircommi();
         assicommi();
-    })
+    });
     $('#telephone').blur(function () {
         var amout = $('#price').val() * $('#discount').val() / 100;
         var telephone = $('#telephone').val();
@@ -109,7 +114,7 @@ $(function () {
             return amout * discount * arr[0] * 0.9 / 10000;
         }
     }
-})
+});
 function retn() {
     window.history.back();
 }

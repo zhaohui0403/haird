@@ -10,6 +10,7 @@ import java.util.Date;
 
 /**
  * Created by Administrator on 2019/4/14.
+ * 财务
  */
 public class Funds implements Serializable{
     private Integer id;
@@ -20,6 +21,7 @@ public class Funds implements Serializable{
     private String amout;
     private Date consdate;
     private int recordId;
+    private String cardId;
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date startTime;
@@ -107,5 +109,13 @@ public class Funds implements Serializable{
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public String getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(String cardId) {
+        this.cardId = cardId;
     }
 }
