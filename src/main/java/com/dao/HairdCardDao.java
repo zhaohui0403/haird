@@ -2,6 +2,7 @@ package com.dao;
 
 import com.bean.HairdCard;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
 */
 @Mapper
 public interface HairdCardDao {
-    List<HairdCard> getHairdCards(HairdCard hairdCard);
+    List<HairdCard> getHairdCards(@Param("cardlist") List<String> cardlist);
 
     void addHairdCard(HairdCard hairdCard);
 
@@ -25,4 +26,6 @@ public interface HairdCardDao {
     List<HairdCard> getHairdCardByCardId(String cardId);
 
     void fail(HairdCard hairdCard);
+
+    List<String> getCardList(HairdCard hairdCard);
 }

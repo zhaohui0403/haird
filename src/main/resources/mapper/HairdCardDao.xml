@@ -30,28 +30,18 @@
         UPDATE hairdcard set status = #{status} where cardId = #{cardId}
     </update>
 
-    <select id="getHairdCards" resultMap="hairdcard">
+    <select id="getHairdCards" resultMap="hairdcard" parameterType="List">
       select
         h.id as id,username,telephone,amout,times,h.cardId as cardId,c.cardId as acardId,cutdate,status
       from
-        hairdcard h left join cutlog c on h.cardId = c.cardId,(select @rowno:=0) t
+        hairdcard h left join cutlog c on h.cardId = c.cardId
       where
-        1 = 1
-        <if test="cardId != null and cardId !='' ">
-            AND h.cardId = #{cardId}
-        </if>
-        <if test="username != null and username !='' ">
-            AND username = #{username}
-        </if>
-        <if test="telephone != null and telephone !=''">
-            and telephone = #{telephone}
-        </if>
-        <if test="status != null">
-            and status = #{status}
-        </if>
-        and signdate between #{startTime} and #{endTime}
-        ORDER BY h.signdate DESC
-        limit #{size} offset #{offset}
+        h.cardId
+        IN
+        <foreach collection="cardlist" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY h.cardId
     </select>
 
     <select id="count" resultType="java.lang.Integer">
@@ -84,6 +74,28 @@
         hairdcard h left join cutlog c on h.cardId = c.cardId
         where
         h.cardId = #{cardId}
+    </select>
+    <select id="getCardList" resultType="java.lang.String">
+        select
+        DISTINCT h.cardId
+        from
+        (select * from hairdcard order by cardId) as h
+        where
+        1 = 1
+        <if test="cardId != null and cardId !='' ">
+            AND h.cardId = #{cardId}
+        </if>
+        <if test="username != null and username !='' ">
+            AND h.username = #{username}
+        </if>
+        <if test="telephone != null and telephone !=''">
+            and h.telephone = #{telephone}
+        </if>
+        <if test="status != null">
+            and h.status = #{status}
+        </if>
+        and h.signdate between #{startTime} and #{endTime}
+        limit #{size} offset #{offset}
     </select>
 
 </mapper>

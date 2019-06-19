@@ -29,8 +29,8 @@ public class HairdCardServiceImpl implements HairdCardService {
 
         cardPage.setIndex(hairdCard.getIndex());
         cardPage.setSize(hairdCard.getSize());
-
-        List<HairdCard> hairdCards = hairdCardDao.getHairdCards(hairdCard);
+        List<String> cardList = hairdCardDao.getCardList(hairdCard);
+        List<HairdCard> hairdCards = hairdCardDao.getHairdCards(cardList);
         cardPage.setContext(hairdCards);
 
         int count = hairdCardDao.count(hairdCard);
