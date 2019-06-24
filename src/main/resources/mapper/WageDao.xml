@@ -9,7 +9,7 @@
         <result column="customname" property="customname" javaType="String"/>
     </resultMap>
     <insert id="insert">
-        insert into wage  values (#{id},#{amout},#{description},sysdate(),#{recordId},#{wageType});
+        insert into wage  values (#{id},#{amout},#{description},sysdate(),#{recordId},#{wageType},#{cutLogId});
     </insert>
     <update id="updateWage" parameterType="com.bean.Wage">
         UPDATE wage SET amout = #{amout}
@@ -17,6 +17,9 @@
     </update>
     <delete id="del" parameterType="Integer">
         DELETE from wage where recordid = #{id}
+    </delete>
+    <delete id="delCutLog">
+        DELETE from wage where cutlogId = #{id}
     </delete>
     <select id="wageDetail" resultMap="wages" parameterType="com.bean.Wage">
         select w.*,c.customname FROM wage w left join custom c on w.id = c.id

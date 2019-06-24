@@ -13,4 +13,6 @@ public interface CutLogService {
     void cut(CutLog cutLog, Record record);
 
     List<CutLog> cutLogs(int id);
+
+    List<CutLog> del(String id);
 }

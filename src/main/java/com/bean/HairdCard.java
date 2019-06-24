@@ -107,7 +107,7 @@ public class HairdCard extends Pageable implements Serializable {
     @Override
     public Date getStartTime() {
         if(super.startTime == null || super.startTime.equals("")){
-            return DateUtils.getMonthDate();
+            return DateUtils.getMayDate();
         }else {
             return startTime;
         }

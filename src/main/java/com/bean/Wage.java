@@ -19,6 +19,7 @@ public class Wage extends Pageable implements Serializable {
     private Date time;
     private int wageType;
     private Integer recordId;
+    private String cutLogId;
 
     public Wage() {
     }
@@ -94,5 +95,13 @@ public class Wage extends Pageable implements Serializable {
         }else {
             return endTime;
         }
+    }
+
+    public String getCutLogId() {
+        return cutLogId;
+    }
+
+    public void setCutLogId(String cutLogId) {
+        this.cutLogId = cutLogId;
     }
 }

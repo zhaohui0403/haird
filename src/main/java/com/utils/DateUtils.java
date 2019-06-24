@@ -46,4 +46,15 @@ public class DateUtils {
         return time;
     }
 
+    //获取19年4月1号时间
+    public static Date getMayDate(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.set(Calendar.YEAR,2019);
+        calendar.set(Calendar.MONTH,3);
+        calendar.set(Calendar.DAY_OF_MONTH,1);
+        Date time = calendar.getTime();
+        return time;
+    }
+
 }

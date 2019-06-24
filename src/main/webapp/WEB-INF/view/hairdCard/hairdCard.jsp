@@ -95,6 +95,9 @@
             maxmin: true,
             area: ['700px', '500px'],
             content: 'cutLog?id=' + id,
+            end: function () { //最后执行reload
+                location.reload();
+            }
         })
     }
 </script>

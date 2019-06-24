@@ -19,4 +19,6 @@ public interface WageDao {
     List<Wage> wageDetail(Wage wage);
 
     void updateWage(Wage wage);
+
+    void delCutLog(String id);
 }

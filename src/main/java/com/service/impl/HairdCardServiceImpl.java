@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,8 +30,13 @@ public class HairdCardServiceImpl implements HairdCardService {
 
         cardPage.setIndex(hairdCard.getIndex());
         cardPage.setSize(hairdCard.getSize());
+
+        List<HairdCard> hairdCards = new ArrayList<HairdCard>();
+
         List<String> cardList = hairdCardDao.getCardList(hairdCard);
-        List<HairdCard> hairdCards = hairdCardDao.getHairdCards(cardList);
+        if(cardList != null && cardList.size() > 0){
+            hairdCards = hairdCardDao.getHairdCards(cardList);
+        }
         cardPage.setContext(hairdCards);
 
         int count = hairdCardDao.count(hairdCard);

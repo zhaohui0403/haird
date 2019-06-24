@@ -36,6 +36,7 @@ public class CutLogServiceImpl implements CutLogService {
         wage.setId(Integer.parseInt(record.getHairstye()));
         wage.setAmout(record.getHaircommi());
         wage.setDescription(cutLog.getCardId() + "号剪发卡剪发提成" + record.getHaircommi() + "元");
+        wage.setCutLogId(cutLog.getId()+"");
         wageDao.insert(wage);
 
         //助理提成
@@ -43,6 +44,7 @@ public class CutLogServiceImpl implements CutLogService {
         wage1.setId(Integer.parseInt(record.getAssistant()));
         wage1.setAmout(record.getAssicommi());
         wage1.setDescription(cutLog.getCardId() + "号剪发卡剪发提成" + record.getAssicommi() + "元");
+        wage1.setCutLogId(cutLog.getId()+"");
         wageDao.insert(wage1);
 
         HairdCard hairdCard = hairdCardDao.getHairdCardByCardId(cutLog.getCardId()).get(0);
@@ -56,5 +58,13 @@ public class CutLogServiceImpl implements CutLogService {
     public List<CutLog> cutLogs(int id) {
         HairdCard hairdCard = hairdCardDao.getHairdCardById(id);
         return cutLogDao.getCutLogs(hairdCard.getCardId());
+    }
+
+    @Override
+    public List<CutLog> del(String id) {
+        String cardId = cutLogDao.getCutLogByLogid(id);
+        cutLogDao.del(id);
+        wageDao.delCutLog(id);
+        return cutLogDao.getCutLogs(cardId);
     }
 }

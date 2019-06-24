@@ -56,4 +56,11 @@ public class CutLogController {
         return "cut/cutlog";
     }
 
+    @RequestMapping("delCut")
+    public String delCut(Model model,String id){
+        List<CutLog> cutLogs = cutLogService.del(id);
+        model.addAttribute("cutlogs",cutLogs);
+        return "cut/cutlog";
+    }
+
 }

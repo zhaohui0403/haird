@@ -13,4 +13,8 @@ public interface CutLogDao {
     void add(CutLog cutLog);
 
     List<CutLog> getCutLogs(String cardId);
+
+    void del(String id);
+
+    String getCutLogByLogid(String id);
 }
