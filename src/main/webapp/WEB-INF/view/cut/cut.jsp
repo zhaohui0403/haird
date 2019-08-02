@@ -110,7 +110,7 @@
         </div>
         <br>
         <div class="form-group">
-            <button type="button" class="btn btn-default" onclick="save()">
+            <button type="button" id ="submit" class="btn btn-default" onclick="save()">
                 确定
             </button>
             <button type="button" class="btn btn-default" onclick="retn()">
