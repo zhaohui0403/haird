@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 /**
- * Created by Administrator on 2019/4/16.
+ * Created by zhh on 2019/4/16.
  */
 @Controller
 public class RecordController {
@@ -36,6 +36,7 @@ public class RecordController {
         List<Custom> assi  = customService.getCustomByType("2");
         model.addAttribute("custom1",hair);
         model.addAttribute("custom2",assi);
+        logger.info("消费记录列表：" + new Gson().toJson(page));
         return "record/record";
     }
 

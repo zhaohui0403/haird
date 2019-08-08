@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.bean.Member;
+import com.google.gson.Gson;
 import com.model.Page;
 import com.service.MemberService;
 import org.slf4j.Logger;
@@ -33,6 +34,7 @@ public class MemberController {
         model.addAttribute("member",member);
         long endTime = new Date().getTime();
         logger.info("会员列表查询用时：" + (endTime-startTime));
+        logger.info("会员列表：" + new Gson().toJson(members));
         return "member/member";
     }
     

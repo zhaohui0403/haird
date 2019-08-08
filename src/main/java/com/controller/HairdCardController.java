@@ -34,6 +34,7 @@ public class HairdCardController {
         model.addAttribute("hairdCard",hairdCard);
         long endTime = new Date().getTime();
         logger.info("剪发卡列表查询用时：" + (endTime-startTime));
+        logger.info("剪发卡列表：" + new Gson().toJson(cards));
         return "hairdCard/hairdCard";
     }
 
