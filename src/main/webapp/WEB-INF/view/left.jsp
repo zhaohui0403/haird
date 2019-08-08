@@ -13,7 +13,7 @@
     <script src="/static/js/left.js"></script>
     <link rel="stylesheet" href="/static/css/left.css">
 </head>
-<body>
+<body style="background-color:#4A515B">
 <div>
     <button type="button" class="btn btn-primary btn-lg nav-btn" onclick="show(this)">会员管理
         <div class="down"></div>
