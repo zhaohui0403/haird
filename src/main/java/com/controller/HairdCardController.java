@@ -4,7 +4,6 @@ import com.bean.HairdCard;
 import com.google.gson.Gson;
 import com.model.Page;
 import com.service.HairdCardService;
-import com.sun.xml.internal.ws.resources.HttpserverMessages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
