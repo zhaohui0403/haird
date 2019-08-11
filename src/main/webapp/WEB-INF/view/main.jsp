@@ -13,7 +13,7 @@
     <jsp:include page="head.jsp"/>
 </head>
 <body>
-<div class="container" style="margin: -10px 0px 0px -20px;width: 100%">
+<div class="container" style="margin: -10px 0px 0px -16px">
     <div class="left" id="left">
         <jsp:include page="left.jsp"/>
     </div>
@@ -24,21 +24,22 @@
 </div>
 <script type="text/javascript">
     $(function () {
-        var height = window.outerHeight;
-        var width = window.outerWidth;
-        $('.container').height(height - 130);
-        $('.container').width(width - 18);
+        var height = window.innerHeight;
+        var width = window.innerWidth;
+        $('.container').height(height - 62);
+        $('.container').width(width - 16);
+        $("#right").width(width - 220);
     })
 </script>
 <style type="text/css">
     #left {
         height: 100%;
+        width: 202px;
         float: left;
         margin: 0px;
     }
 
     #right {
-        width:85%;
         height: 100%;
         float: left;
     }

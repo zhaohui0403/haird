@@ -30,6 +30,9 @@
         }
     </style>
     <script type="text/javascript">
+        /*top.location != self.location 就是说当前窗体的url和父窗体的 url是不是相同
+
+        如果相同执行top.location=self.location;}，把窗体的url设成和本窗体一样。这个是为了防止别的网站嵌入你的网站的内容（比如用iframe嵌入的你的网站的页面）*/
         if (top.location !== self.location) {
             top.location = self.location;
         }
@@ -38,12 +41,14 @@
             if (user == null) {
                 top.href = "/login";
             }
+            var width = window.innerWidth;
+            $('.head').width(width);
         });
     </script>
 </head>
 <body>
 <div>
-    <div style="background-color: #333333;margin: 0px;text-align: center">
+    <div class="head" style="background-color: #333333;margin: 0px;text-align: center">
         <h1>管理系统</h1>
     </div>
 </div>
